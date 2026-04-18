@@ -5,18 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support - Link App</title>
     <style>
-        body { background-color: #BEAA73; color: #37415A; font-family: sans-serif; text-align: center; padding: 50px; }
-        .box { background: #E1CD96; padding: 40px; border-radius: 20px; max-width: 500px; margin: 0 auto; }
-        a { color: #37415A; font-weight: bold; }
+        :root { --appTheme: #BEAA73; --dockColor: #E1CD96; --appAccent: #37415A; }
+        body { background-color: var(--appTheme); color: var(--appAccent); font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+        .contact-card { background: var(--dockColor); padding: 50px 40px; border-radius: 30px; text-align: center; max-width: 450px; width: 100%; box-shadow: 0 15px 35px rgba(0,0,0,0.1); animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        h2 { font-size: 2rem; margin-top: 0; margin-bottom: 10px; }
+        p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 30px; line-height: 1.5; }
+        .email-btn { display: inline-block; background-color: var(--appAccent); color: #FFFFFF; padding: 16px 32px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(55, 65, 90, 0.3); margin-bottom: 30px; }
+        .email-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(55, 65, 90, 0.4); }
+        .nav-back { display: block; color: var(--appAccent); text-decoration: none; font-weight: 600; opacity: 0.8; transition: opacity 0.2s; }
+        .nav-back:hover { opacity: 1; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h2>Link Support</h2>
-        <p>For help and questions you can reach us at:</p>
-        <p><a href="mailto:support.link.ai@gmail.com">support.link.ai@gmail.com</a></p>
-        <br>
-        <a href="index.html">← Back to Home</a>
+    <div class="contact-card">
+        <h2>We're here to help.</h2>
+        <p>If you're having issues with your account, AutoMatch, or just have a general question, drop us a line.</p>
+        
+        <a href="mailto:contact@linkapp.ca" class="email-btn">contact@linkapp.ca</a>
+        
+        <a href="index.html" class="nav-back">← Back to Home</a>
     </div>
 </body>
 </html>
