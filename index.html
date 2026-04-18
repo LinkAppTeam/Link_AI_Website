@@ -14,103 +14,145 @@
         body {
             background-color: var(--appTheme);
             color: var(--appAccent);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            text-align: center;
+            overflow-x: hidden;
         }
 
-        /* Top Left Header Logo */
+        /* Glassmorphism Header */
         header {
             width: 100%;
-            padding: 20px;
+            padding: 20px 40px;
             box-sizing: border-box;
-            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            background: rgba(190, 170, 115, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .header-logo {
-            height: 40px;
+            height: 35px;
             width: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .header-logo:hover {
+            transform: scale(1.05);
         }
 
-        /* Main Center Content */
-        .container {
+        /* Interactive Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Main Hero Section */
+        .hero {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 120px 20px 60px 20px;
+            text-align: center;
         }
 
         .main-icon {
-            width: 150px;
-            height: 150px;
-            border-radius: 32px; /* iOS style rounding */
-            margin-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            width: 160px;
+            height: 160px;
+            border-radius: 36px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(55, 65, 90, 0.25);
             object-fit: cover;
+            animation: float 6s ease-in-out infinite;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            margin: 0 0 10px 0;
-            color: var(--appAccent);
+            letter-spacing: -1.5px;
+            margin: 0 0 15px 0;
+            animation: fadeUp 0.8s ease-out forwards;
         }
 
-        p {
-            font-size: 1.2rem;
-            color: var(--appAccent);
-            opacity: 0.8;
-            max-width: 400px;
-            line-height: 1.5;
+        p.subtitle {
+            font-size: 1.3rem;
+            opacity: 0.85;
+            max-width: 450px;
+            line-height: 1.6;
             margin-bottom: 40px;
+            animation: fadeUp 1s ease-out forwards;
         }
 
+        /* Premium Download Button */
         .download-btn {
             background-color: var(--appAccent);
             color: #FFFFFF;
-            padding: 16px 32px;
+            padding: 18px 36px;
             border-radius: 30px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 1.1rem;
-            transition: transform 0.2s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             box-shadow: 0 4px 15px rgba(55, 65, 90, 0.3);
+            animation: fadeUp 1.2s ease-out forwards;
         }
 
         .download-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(55, 65, 90, 0.4);
+            background-color: #2a3245;
         }
 
         /* Footer */
         footer {
             background-color: var(--dockColor);
-            padding: 30px 20px;
-            font-size: 0.9rem;
-            color: var(--appAccent);
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
         }
 
-        footer a {
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
             color: var(--appAccent);
             text-decoration: none;
-            font-weight: bold;
-            margin: 0 15px;
+            font-weight: 600;
+            transition: color 0.2s ease;
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .footer-links a:hover {
+            color: rgba(55, 65, 90, 0.7);
         }
         
         .copyright {
-            margin-top: 15px;
-            opacity: 0.7;
+            font-size: 0.85rem;
+            opacity: 0.6;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -122,22 +164,21 @@
         </a>
     </header>
 
-    <div class="container">
+    <div class="hero">
         <img src="AppIcon_1024.png" alt="Link App Icon" class="main-icon">
-        
         <h1>Link</h1>
-        <p>AI-driven matchmaking. Find your link without the endless swiping.</p>
-        
+        <p class="subtitle">AI-driven matchmaking. Find your link without the endless swiping.</p>
         <a href="#" class="download-btn">Coming Soon to the App Store</a>
     </div>
 
     <footer>
-        <a href="support.html">Support</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        
+        <div class="footer-links">
+            <a href="support.html">Support</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </div>
         <div class="copyright">
-            &copy; 2026 2717292 ONTARIO INC. All rights reserved.
+            &copy; 2026 ONTARIO 2717292 INC. All rights reserved.
         </div>
     </footer>
 
