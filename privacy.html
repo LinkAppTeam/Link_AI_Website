@@ -3,89 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Link App</title>
+    <title>Privacy Policy — Link</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
     <style>
-        :root { --appTheme: #BEAA73; --dockColor: #E1CD96; --appAccent: #37415A; }
-        body { background-color: var(--appTheme); color: var(--appAccent); font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; margin: 0; padding: 40px 20px; line-height: 1.6; }
-        .nav-back { display: inline-block; margin-bottom: 30px; color: var(--appAccent); text-decoration: none; font-weight: 700; transition: transform 0.2s; }
-        .nav-back:hover { transform: translateX(-5px); }
-        .content { background: var(--dockColor); padding: 50px; border-radius: 24px; max-width: 800px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        h1 { font-size: 2.5rem; margin-top: 0; letter-spacing: -0.5px; }
-        h2 { font-size: 1.4rem; margin-top: 30px; border-bottom: 2px solid rgba(55,65,90,0.1); padding-bottom: 8px; }
-        p, ul { font-size: 1.05rem; opacity: 0.9; }
-        li { margin-bottom: 8px; }
-        .date { font-weight: 600; opacity: 0.7; margin-bottom: 30px; }
+        :root { --gold:#BEAA73;--gold-light:#E1CD96;--navy:#37415A;--navy-dark:#1E2535;--navy-deep:#131826; }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        html{scroll-behavior:smooth;}
+        body{background:var(--navy-deep);color:#fff;font-family:'DM Sans',sans-serif;cursor:none;}
+        #cur-dot{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+        #cur-ring{width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.5;}
+        header{padding:20px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(190,170,115,.1);background:rgba(13,18,30,.7);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+        .logo-mark{width:34px;height:34px;border-radius:10px;overflow:hidden;background:var(--gold);}
+        .logo-mark img{width:100%;height:100%;object-fit:cover;display:block;}
+        .logo-name{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--gold-light);letter-spacing:.5px;}
+        .back-link{color:rgba(255,255,255,.5);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;}
+        .back-link:hover{color:var(--gold-light);}
+        .page-wrap{max-width:780px;margin:0 auto;padding:70px 24px 100px;}
+        .doc-header{margin-bottom:60px;}
+        .doc-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:14px;}
+        .doc-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5vw,4.2rem);font-weight:700;line-height:1.05;letter-spacing:-1px;margin-bottom:16px;}
+        .doc-date{font-size:.85rem;color:rgba(255,255,255,.35);font-weight:500;}
+        .doc-intro{font-size:1.02rem;color:rgba(255,255,255,.6);line-height:1.8;padding:28px 0 40px;border-bottom:1px solid rgba(190,170,115,.1);}
+        .toc{padding:32px 0 40px;border-bottom:1px solid rgba(255,255,255,.05);}
+        .toc-title{font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px;}
+        .toc-list{display:flex;flex-wrap:wrap;gap:8px;}
+        .toc-link{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:100px;padding:6px 14px;font-size:.8rem;color:rgba(255,255,255,.5);text-decoration:none;transition:all .2s;}
+        .toc-link:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(190,170,115,.06);}
+        .doc-body{padding-top:50px;}
+        .doc-section{margin-bottom:50px;scroll-margin-top:100px;}
+        .sec-num{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+        .sec-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:16px;color:#fff;}
+        .sec-body{font-size:.97rem;color:rgba(255,255,255,.6);line-height:1.85;}
+        .sec-body p{margin-bottom:14px;}
+        .sec-body ul{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+        .sec-body li{display:flex;align-items:flex-start;gap:10px;color:rgba(255,255,255,.6);font-size:.97rem;}
+        .sec-body li::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0;margin-top:8px;}
+        .sec-body a{color:var(--gold-light);text-decoration:none;}
+        .sec-body a:hover{text-decoration:underline;}
+        .sec-body strong{color:rgba(255,255,255,.8);font-weight:600;}
+        footer{padding:24px 60px;border-top:1px solid rgba(190,170,115,.08);display:flex;justify-content:space-between;align-items:center;}
+        .footer-copy{font-size:.78rem;color:rgba(255,255,255,.25);}
+        .footer-links{display:flex;gap:22px;}
+        .footer-links a{font-size:.78rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+        .footer-links a:hover{color:var(--gold);}
+        @media(max-width:600px){header{padding:14px 20px;}footer{flex-direction:column;gap:12px;padding:20px;text-align:center;}}
     </style>
 </head>
 <body>
-    <div class="content">
-        <a href="index.html" class="nav-back">← Back to Home</a>
-        <h1>Privacy Policy</h1>
-        <div class="date">Effective Date: April 2026</div>
-        
-        <p>ONTARIO 2717292 INC. ("we", "our", or "us") operates the Link mobile application ("App"). This Privacy Policy explains how we collect, use, and protect your information.</p>
+<div id="cur-dot"></div><div id="cur-ring"></div>
+<header>
+    <a href="index.html" class="logo">
+        <div class="logo-mark"><img src="AppIcon_1024.png" alt="Link" onerror="this.parentNode.style.background='var(--gold)'"></div>
+        <span class="logo-name">Link</span>
+    </a>
+    <a href="index.html" class="back-link">← Home</a>
+</header>
 
-        <h2>1. Information We Collect</h2>
-        <p><strong>a. Information You Provide</strong></p>
-        <ul>
-            <li>Name and email address (via Apple or Google sign-in)</li>
-            <li>Profile information (e.g., photos, birthdate, location, preferences, prompts, and optional personal details)</li>
-            <li>Messages and interactions with other users</li>
-        </ul>
-        <p><strong>b. Automatically Collected Information</strong></p>
-        <ul>
-            <li>Device and usage data (e.g., app activity, interactions, logs)</li>
-        </ul>
-        <p><strong>c. AI-Processed Data</strong></p>
-        <p>Profile information and user interactions may be processed using AI systems to:</p>
-        <ul>
-            <li>Generate matches</li>
-            <li>Suggest message replies</li>
-            <li>Improve user experience</li>
-        </ul>
-
-        <h2>2. How We Use Your Information</h2>
-        <p>We use your information to:</p>
-        <ul>
-            <li>Create and manage your account</li>
-            <li>Provide matchmaking services</li>
-            <li>Enable messaging between users</li>
-            <li>Generate AI-powered matches and suggestions</li>
-            <li>Improve and optimize the App</li>
-            <li>Detect and prevent fraud, spam, or abuse</li>
-        </ul>
-
-        <h2>3. Location Data</h2>
-        <p>We use your location (provided directly or selected by you) to match you with nearby users. We do not track precise real-time location unless explicitly stated.</p>
-
-        <h2>4. Sharing of Information</h2>
-        <p>We do not sell your personal data. We may share data:</p>
-        <ul>
-            <li>With service providers (e.g., hosting, analytics, AI processing)</li>
-            <li>To comply with legal obligations</li>
-            <li>To enforce our Terms</li>
-        </ul>
-
-        <h2>5. AI and Automated Processing</h2>
-        <p>We use AI (including large language models) to: recommend matches and analyze conversations for reply suggestions. These systems process user-provided data but do not make legally binding decisions.</p>
-
-        <h2>6. Data Retention</h2>
-        <p>We retain your data as long as your account is active or as necessary to provide services and comply with legal obligations.</p>
-
-        <h2>7. Your Rights</h2>
-        <p>You may: Access or update your information, delete your account, or contact us for data-related requests.</p>
-
-        <h2>8. Security</h2>
-        <p>We implement reasonable safeguards to protect your information. However, no system is completely secure.</p>
-
-        <h2>9. Children</h2>
-        <p>The App is not intended for users under 18.</p>
-
-        <h2>10. Changes to This Policy</h2>
-        <p>We may update this policy from time to time. Continued use of the App means you accept those changes.</p>
-
-        <h2>11. Contact</h2>
-        <p>For questions, contact: <a href="mailto:contact@linkapp.ca" style="color:var(--appAccent); font-weight:bold;">contact@linkapp.ca</a></p>
+<div class="page-wrap">
+    <div class="doc-header">
+        <span class="doc-eyebrow">Legal</span>
+        <h1 class="doc-title">Privacy Policy</h1>
+        <div class="doc-date">Effective Date: April 2026</div>
     </div>
+
+    <div class="doc-intro">
+        ONTARIO 2717292 INC. ("we", "our", or "us") operates the Link mobile application ("App"). This Privacy Policy explains how we collect, use, and protect your information when you use Link.
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">Contents</div>
+        <div class="toc-list">
+            <a href="#s1" class="toc-link">1. Information We Collect</a>
+            <a href="#s2" class="toc-link">2. How We Use It</a>
+            <a href="#s3" class="toc-link">3. Location Data</a>
+            <a href="#s4" class="toc-link">4. Sharing</a>
+            <a href="#s5" class="toc-link">5. AI Processing</a>
+            <a href="#s6" class="toc-link">6. Retention</a>
+            <a href="#s7" class="toc-link">7. Your Rights</a>
+            <a href="#s8" class="toc-link">8. Security</a>
+            <a href="#s9" class="toc-link">9. Children</a>
+            <a href="#s10" class="toc-link">10. Changes</a>
+            <a href="#s11" class="toc-link">11. Contact</a>
+        </div>
+    </div>
+
+    <div class="doc-body">
+        <div class="doc-section" id="s1">
+            <div class="sec-num">Section 01</div>
+            <div class="sec-title">Information We Collect</div>
+            <div class="sec-body">
+                <p><strong>Information You Provide</strong></p>
+                <ul>
+                    <li>Name and email address (via Apple or Google sign-in)</li>
+                    <li>Profile information — photos, birthdate, location, preferences, prompts, and optional personal details</li>
+                    <li>Messages and interactions with other users</li>
+                </ul>
+                <p><strong>Automatically Collected</strong></p>
+                <ul>
+                    <li>Device and usage data such as app activity, interactions, and logs</li>
+                </ul>
+                <p><strong>AI-Processed Data</strong></p>
+                <p>Profile information and user interactions may be processed using AI systems to generate matches, suggest message replies, and improve your experience.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="s2">
+            <div class="sec-num">Section 02</div>
+            <div class="sec-title">How We Use Your Information</div>
+            <div class="sec-body">
+                <ul>
+                    <li>Create and manage your account</li>
+                    <li>Provide matchmaking and AutoMatch services</li>
+                    <li>Enable messaging between matched users</li>
+                    <li>Generate AI-powered matches and message suggestions</li>
+                    <li>Improve and optimise the App</li>
+                    <li>Detect and prevent fraud, spam, or abuse</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="doc-section" id="s3">
+            <div class="sec-num">Section 03</div>
+            <div class="sec-title">Location Data</div>
+            <div class="sec-body">
+                <p>We use your location (provided directly or selected by you) to match you with nearby users. We do not track precise real-time location unless explicitly stated.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="s4">
+            <div class="sec-num">Section 04</div>
+            <div class="sec-title">Sharing of Information</div>
+            <div class="sec-body">
+                <p>We do not sell your personal data. We may share data:</p>
+                <ul>
+                    <li>With service providers (e.g., hosting, analytics, AI processing)</li>
+                    <li>To comply with legal obligations</li>
+                    <li>To enforce our Terms of Service</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="doc-section" id="s5">
+            <div class="sec-num">Section 05</div>
+            <div class="sec-title">AI and Automated Processing</div>
+            <div class="sec-body">
+                <p>We use AI (including large language models) to recommend matches and analyse conversations for reply suggestions. These systems process user-provided data but do not make legally binding decisions about individuals.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="s6">
+            <div class="sec-num">Section 06</div>
+            <div class="sec-title">Data Retention</div>
+            <div class="sec-body">
+                <p>We retain your data as long as your account is active or as necessary to provide services and comply with legal obligations.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="s7">
+            <div class="sec-num">Section 07</div>
+            <div class="sec-title">Your Rights</div>
+            <div class="sec-body">
+                <p>You may access or update your information, delete your account from within the app, or contact us for data-related requests at <a href="mailto:contact@linkapp.ca">contact@linkapp.ca</a>.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="s8">
+            <div class="sec-num">Section 08</div>
+            <div class="sec-title">Security</div>
+            <div class="sec-body">
+                <p>We implement reasonable technical and organisational safeguards to protect your information. However, no system is completely secure.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="s9">
+            <div class="sec-num">Section 09</div>
+            <div class="sec-title">Children</div>
+            <div class="sec-body">
+                <p>The App is not intended for users under 18 years of age. We do not knowingly collect information from minors.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="s10">
+            <div class="sec-num">Section 10</div>
+            <div class="sec-title">Changes to This Policy</div>
+            <div class="sec-body">
+                <p>We may update this policy from time to time. We will notify you of significant changes. Continued use of the App following updates constitutes acceptance of those changes.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="s11">
+            <div class="sec-num">Section 11</div>
+            <div class="sec-title">Contact</div>
+            <div class="sec-body">
+                <p>For any privacy-related questions or requests, please contact us at <a href="mailto:contact@linkapp.ca">contact@linkapp.ca</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-copy">© 2026 ONTARIO 2717292 INC. All rights reserved.</div>
+    <div class="footer-links">
+        <a href="terms.html">Terms of Service</a>
+        <a href="support.html">Support</a>
+        <a href="index.html">Home</a>
+    </div>
+</footer>
+<script>
+const d=document.getElementById('cur-dot'),r=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;d.style.left=mx+'px';d.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);})();
+</script>
 </body>
 </html>

@@ -3,74 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - Link App</title>
+    <title>Terms of Service — Link</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
     <style>
-        :root { --appTheme: #BEAA73; --dockColor: #E1CD96; --appAccent: #37415A; }
-        body { background-color: var(--appTheme); color: var(--appAccent); font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; margin: 0; padding: 40px 20px; line-height: 1.6; }
-        .nav-back { display: inline-block; margin-bottom: 30px; color: var(--appAccent); text-decoration: none; font-weight: 700; transition: transform 0.2s; }
-        .nav-back:hover { transform: translateX(-5px); }
-        .content { background: var(--dockColor); padding: 50px; border-radius: 24px; max-width: 800px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        h1 { font-size: 2.5rem; margin-top: 0; letter-spacing: -0.5px; }
-        h2 { font-size: 1.4rem; margin-top: 30px; border-bottom: 2px solid rgba(55,65,90,0.1); padding-bottom: 8px; }
-        p, ul { font-size: 1.05rem; opacity: 0.9; }
-        li { margin-bottom: 8px; }
-        .date { font-weight: 600; opacity: 0.7; margin-bottom: 30px; }
+        :root{--gold:#BEAA73;--gold-light:#E1CD96;--navy:#37415A;--navy-dark:#1E2535;--navy-deep:#131826;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        html{scroll-behavior:smooth;}
+        body{background:var(--navy-deep);color:#fff;font-family:'DM Sans',sans-serif;cursor:none;}
+        #cur-dot{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+        #cur-ring{width:38px;height:38px;border:1.5px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.5;}
+        header{padding:20px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(190,170,115,.1);background:rgba(13,18,30,.7);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+        .logo-mark{width:34px;height:34px;border-radius:10px;overflow:hidden;background:var(--gold);}
+        .logo-mark img{width:100%;height:100%;object-fit:cover;display:block;}
+        .logo-name{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--gold-light);letter-spacing:.5px;}
+        .back-link{color:rgba(255,255,255,.5);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s;}
+        .back-link:hover{color:var(--gold-light);}
+        .page-wrap{max-width:780px;margin:0 auto;padding:70px 24px 100px;}
+        .doc-header{margin-bottom:60px;}
+        .doc-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:14px;}
+        .doc-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5vw,4.2rem);font-weight:700;line-height:1.05;letter-spacing:-1px;margin-bottom:16px;}
+        .doc-date{font-size:.85rem;color:rgba(255,255,255,.35);font-weight:500;}
+        .doc-intro{font-size:1.02rem;color:rgba(255,255,255,.6);line-height:1.8;padding:28px 0 40px;border-bottom:1px solid rgba(190,170,115,.1);}
+        .toc{padding:32px 0 40px;border-bottom:1px solid rgba(255,255,255,.05);}
+        .toc-title{font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px;}
+        .toc-list{display:flex;flex-wrap:wrap;gap:8px;}
+        .toc-link{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:100px;padding:6px 14px;font-size:.8rem;color:rgba(255,255,255,.5);text-decoration:none;transition:all .2s;}
+        .toc-link:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(190,170,115,.06);}
+        .doc-body{padding-top:50px;}
+        .doc-section{margin-bottom:50px;scroll-margin-top:100px;}
+        .sec-num{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+        .sec-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:16px;color:#fff;}
+        .sec-body{font-size:.97rem;color:rgba(255,255,255,.6);line-height:1.85;}
+        .sec-body p{margin-bottom:14px;}
+        .sec-body ul{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+        .sec-body li{display:flex;align-items:flex-start;gap:10px;color:rgba(255,255,255,.6);font-size:.97rem;}
+        .sec-body li::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0;margin-top:8px;}
+        .sec-body a{color:var(--gold-light);text-decoration:none;}
+        .sec-body a:hover{text-decoration:underline;}
+        .sec-body strong{color:rgba(255,255,255,.8);font-weight:600;}
+        footer{padding:24px 60px;border-top:1px solid rgba(190,170,115,.08);display:flex;justify-content:space-between;align-items:center;}
+        .footer-copy{font-size:.78rem;color:rgba(255,255,255,.25);}
+        .footer-links{display:flex;gap:22px;}
+        .footer-links a{font-size:.78rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+        .footer-links a:hover{color:var(--gold);}
+        @media(max-width:600px){header{padding:14px 20px;}footer{flex-direction:column;gap:12px;padding:20px;text-align:center;}}
     </style>
 </head>
 <body>
-    <div class="content">
-        <a href="index.html" class="nav-back">← Back to Home</a>
-        <h1>Terms of Service</h1>
-        <div class="date">Effective Date: April 2026</div>
-        
-        <p>These Terms of Service ("Terms") govern your use of the Link mobile application ("App"), operated by ONTARIO 2717292 INC.</p>
+<div id="cur-dot"></div><div id="cur-ring"></div>
+<header>
+    <a href="index.html" class="logo">
+        <div class="logo-mark"><img src="AppIcon_1024.png" alt="Link" onerror="this.parentNode.style.background='var(--gold)'"></div>
+        <span class="logo-name">Link</span>
+    </a>
+    <a href="index.html" class="back-link">← Home</a>
+</header>
 
-        <h2>1. Eligibility</h2>
-        <p>You must be at least 18 years old to use the App.</p>
-
-        <h2>2. Account Registration</h2>
-        <p>You agree to:</p>
-        <ul>
-            <li>Provide accurate information</li>
-            <li>Maintain the security of your account</li>
-            <li>Be responsible for all activity under your account</li>
-        </ul>
-
-        <h2>3. Use of the App</h2>
-        <p>You agree not to:</p>
-        <ul>
-            <li>Use the App for illegal purposes</li>
-            <li>Harass, abuse, or harm other users</li>
-            <li>Upload false, misleading, or inappropriate content</li>
-            <li>Attempt to bypass security or matching systems</li>
-        </ul>
-
-        <h2>4. Matching and AI Features</h2>
-        <p>The App uses algorithms and AI to suggest matches, provide automated match recommendations, and generate message suggestions. We do not guarantee compatibility, outcomes, or relationship success.</p>
-
-        <h2>5. Messaging and User Interaction</h2>
-        <p>Users may communicate only after mutual matching. You are solely responsible for your interactions with other users.</p>
-
-        <h2>6. Paid Features</h2>
-        <p>We may offer AI-generated message credits, subscription plans, and additional features (e.g., increased matches or likes). All purchases are final unless required by law.</p>
-
-        <h2>7. Content</h2>
-        <p>You retain ownership of content you upload but grant us a license to use it to operate and improve the App.</p>
-
-        <h2>8. Termination</h2>
-        <p>We may suspend or terminate your account if you violate these Terms.</p>
-
-        <h2>9. Disclaimer</h2>
-        <p>The App is provided "as is" without warranties of any kind. We are not responsible for user behavior or interactions.</p>
-
-        <h2>10. Limitation of Liability</h2>
-        <p>To the maximum extent permitted by law, we are not liable for any indirect or consequential damages arising from use of the App.</p>
-
-        <h2>11. Changes to Terms</h2>
-        <p>We may update these Terms. Continued use means acceptance.</p>
-
-        <h2>12. Contact</h2>
-        <p>For questions, contact: <a href="mailto:contact@linkapp.ca" style="color:var(--appAccent); font-weight:bold;">contact@linkapp.ca</a></p>
+<div class="page-wrap">
+    <div class="doc-header">
+        <span class="doc-eyebrow">Legal</span>
+        <h1 class="doc-title">Terms of Service</h1>
+        <div class="doc-date">Effective Date: April 2026</div>
     </div>
+
+    <div class="doc-intro">
+        These Terms of Service ("Terms") govern your use of the Link mobile application ("App"), operated by ONTARIO 2717292 INC. By using the App, you agree to these Terms.
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">Contents</div>
+        <div class="toc-list">
+            <a href="#t1" class="toc-link">1. Eligibility</a>
+            <a href="#t2" class="toc-link">2. Account</a>
+            <a href="#t3" class="toc-link">3. Use of App</a>
+            <a href="#t4" class="toc-link">4. AI Features</a>
+            <a href="#t5" class="toc-link">5. Messaging</a>
+            <a href="#t6" class="toc-link">6. Paid Features</a>
+            <a href="#t7" class="toc-link">7. Content</a>
+            <a href="#t8" class="toc-link">8. Termination</a>
+            <a href="#t9" class="toc-link">9. Disclaimer</a>
+            <a href="#t10" class="toc-link">10. Liability</a>
+            <a href="#t11" class="toc-link">11. Changes</a>
+            <a href="#t12" class="toc-link">12. Contact</a>
+        </div>
+    </div>
+
+    <div class="doc-body">
+        <div class="doc-section" id="t1">
+            <div class="sec-num">Section 01</div>
+            <div class="sec-title">Eligibility</div>
+            <div class="sec-body">
+                <p>You must be at least 18 years old to use the App. By creating an account, you represent that you meet this requirement.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t2">
+            <div class="sec-num">Section 02</div>
+            <div class="sec-title">Account Registration</div>
+            <div class="sec-body">
+                <p>You agree to:</p>
+                <ul>
+                    <li>Provide accurate and truthful information during registration</li>
+                    <li>Maintain the security of your account credentials</li>
+                    <li>Be fully responsible for all activity that occurs under your account</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t3">
+            <div class="sec-num">Section 03</div>
+            <div class="sec-title">Use of the App</div>
+            <div class="sec-body">
+                <p>You agree not to:</p>
+                <ul>
+                    <li>Use the App for any illegal purpose</li>
+                    <li>Harass, abuse, threaten, or harm other users</li>
+                    <li>Upload false, misleading, or inappropriate content</li>
+                    <li>Attempt to bypass, reverse-engineer, or tamper with security or matching systems</li>
+                    <li>Create multiple accounts or impersonate others</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t4">
+            <div class="sec-num">Section 04</div>
+            <div class="sec-title">Matching and AI Features</div>
+            <div class="sec-body">
+                <p>The App uses algorithms and AI systems to suggest matches, provide automated match recommendations (AutoMatch), and generate message suggestions (Ask Linker). We do not guarantee compatibility, specific outcomes, or relationship success.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t5">
+            <div class="sec-num">Section 05</div>
+            <div class="sec-title">Messaging and User Interaction</div>
+            <div class="sec-body">
+                <p>Users may communicate only after mutual matching or through the AutoMatch feature. You are solely responsible for your interactions with other users. Link is not responsible for the conduct of any user.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t6">
+            <div class="sec-num">Section 06</div>
+            <div class="sec-title">Paid Features</div>
+            <div class="sec-body">
+                <p>We may offer AI-generated message credits (LinkBucks), subscription plans, and additional features such as increased matches or likes. All purchases are final unless otherwise required by applicable law.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t7">
+            <div class="sec-num">Section 07</div>
+            <div class="sec-title">Content</div>
+            <div class="sec-body">
+                <p>You retain ownership of content you upload, but grant ONTARIO 2717292 INC. a non-exclusive licence to use it to operate and improve the App. You are responsible for ensuring your content does not violate third-party rights or applicable laws.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t8">
+            <div class="sec-num">Section 08</div>
+            <div class="sec-title">Termination</div>
+            <div class="sec-body">
+                <p>We may suspend or permanently terminate your account at our discretion if you violate these Terms or engage in behaviour harmful to other users or the platform.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t9">
+            <div class="sec-num">Section 09</div>
+            <div class="sec-title">Disclaimer</div>
+            <div class="sec-body">
+                <p>The App is provided "as is" without warranties of any kind, express or implied. We are not responsible for the accuracy of AI-generated content or for the behaviour, actions, or interactions of any users.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t10">
+            <div class="sec-num">Section 10</div>
+            <div class="sec-title">Limitation of Liability</div>
+            <div class="sec-body">
+                <p>To the maximum extent permitted by applicable law, ONTARIO 2717292 INC. shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of the App.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t11">
+            <div class="sec-num">Section 11</div>
+            <div class="sec-title">Changes to Terms</div>
+            <div class="sec-body">
+                <p>We may update these Terms from time to time. We will make reasonable efforts to notify you of significant changes. Continued use of the App after changes are posted constitutes your acceptance of the revised Terms.</p>
+            </div>
+        </div>
+
+        <div class="doc-section" id="t12">
+            <div class="sec-num">Section 12</div>
+            <div class="sec-title">Contact</div>
+            <div class="sec-body">
+                <p>For questions about these Terms, please contact us at <a href="mailto:contact@linkapp.ca">contact@linkapp.ca</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-copy">© 2026 ONTARIO 2717292 INC. All rights reserved.</div>
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="support.html">Support</a>
+        <a href="index.html">Home</a>
+    </div>
+</footer>
+<script>
+const d=document.getElementById('cur-dot'),r=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;d.style.left=mx+'px';d.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);})();
+</script>
 </body>
 </html>

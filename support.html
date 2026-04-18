@@ -3,28 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support - Link App</title>
+    <title>Support — Link</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
     <style>
-        :root { --appTheme: #BEAA73; --dockColor: #E1CD96; --appAccent: #37415A; }
-        body { background-color: var(--appTheme); color: var(--appAccent); font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
-        .contact-card { background: var(--dockColor); padding: 50px 40px; border-radius: 30px; text-align: center; max-width: 450px; width: 100%; box-shadow: 0 15px 35px rgba(0,0,0,0.1); animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        h2 { font-size: 2rem; margin-top: 0; margin-bottom: 10px; }
-        p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 30px; line-height: 1.5; }
-        .email-btn { display: inline-block; background-color: var(--appAccent); color: #FFFFFF; padding: 16px 32px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(55, 65, 90, 0.3); margin-bottom: 30px; }
-        .email-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(55, 65, 90, 0.4); }
-        .nav-back { display: block; color: var(--appAccent); text-decoration: none; font-weight: 600; opacity: 0.8; transition: opacity 0.2s; }
-        .nav-back:hover { opacity: 1; }
+        :root {
+            --gold: #BEAA73; --gold-light: #E1CD96;
+            --navy: #37415A; --navy-dark: #1E2535; --navy-deep: #131826;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--navy-deep); color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh; display: flex; flex-direction: column;
+            cursor: none;
+        }
+        #cur-dot {
+            width: 10px; height: 10px; background: var(--gold);
+            border-radius: 50%; position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9999; transform: translate(-50%,-50%);
+        }
+        #cur-ring {
+            width: 38px; height: 38px; border: 1.5px solid var(--gold);
+            border-radius: 50%; position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: .5;
+        }
+        /* Header */
+        header {
+            padding: 20px 60px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(190,170,115,.1);
+            background: rgba(13,18,30,.7); backdrop-filter: blur(20px);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-mark {
+            width: 34px; height: 34px; border-radius: 10px; overflow: hidden; background: var(--gold);
+        }
+        .logo-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .logo-name {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.55rem;
+            font-weight: 600; color: var(--gold-light); letter-spacing: .5px;
+        }
+        .back-link {
+            color: rgba(255,255,255,.5); text-decoration: none; font-size: .88rem;
+            font-weight: 500; transition: color .2s; display: flex; align-items: center; gap: 6px;
+        }
+        .back-link:hover { color: var(--gold-light); }
+        /* Main */
+        main {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+        main::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(190,170,115,.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .support-card {
+            position: relative; z-index: 1;
+            background: rgba(255,255,255,.03);
+            border: 1px solid rgba(190,170,115,.15);
+            border-radius: 32px; padding: 60px 52px;
+            text-align: center; max-width: 500px; width: 100%;
+            box-shadow: 0 40px 80px rgba(0,0,0,.35);
+            animation: popIn .6s cubic-bezier(.175,.885,.32,1.275) forwards;
+        }
+        @keyframes popIn { from { opacity:0; transform:scale(.94) translateY(20px); } to { opacity:1; transform:scale(1) translateY(0); } }
+        .linker-img {
+            width: 100px; height: 100px; object-fit: contain;
+            mix-blend-mode: screen; margin: 0 auto 28px; display: block;
+            animation: bob 4s ease-in-out infinite;
+        }
+        @keyframes bob { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
+        .support-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem; font-weight: 700; margin-bottom: 14px; color: #fff;
+        }
+        .support-body {
+            font-size: 1rem; color: rgba(255,255,255,.5); line-height: 1.7;
+            margin-bottom: 36px;
+        }
+        .email-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--gold); color: var(--navy-deep);
+            padding: 15px 34px; border-radius: 100px;
+            text-decoration: none; font-weight: 700; font-size: 1rem;
+            transition: all .3s; margin-bottom: 28px;
+        }
+        .email-btn:hover { background: var(--gold-light); transform: translateY(-3px); box-shadow: 0 14px 32px rgba(190,170,115,.32); }
+        .divider {
+            width: 60px; height: 1px; background: rgba(255,255,255,.1); margin: 0 auto 24px;
+        }
+        .faq-list { text-align: left; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+        .faq-item {
+            background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+            border-radius: 14px; padding: 14px 18px; cursor: pointer; transition: all .25s;
+        }
+        .faq-item:hover { border-color: rgba(190,170,115,.22); background: rgba(190,170,115,.06); }
+        .faq-q { font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.8); margin-bottom: 0; display: flex; justify-content: space-between; align-items: center; }
+        .faq-a { font-size: .84rem; color: rgba(255,255,255,.45); line-height: 1.6; margin-top: 8px; display: none; }
+        .faq-item.open .faq-a { display: block; }
+        .faq-item.open .faq-arr { transform: rotate(180deg); }
+        .faq-arr { transition: transform .25s; font-size: .7rem; opacity: .5; flex-shrink: 0; }
+        /* Footer */
+        footer {
+            padding: 24px 60px;
+            border-top: 1px solid rgba(190,170,115,.08);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .footer-copy { font-size: .78rem; color: rgba(255,255,255,.25); }
+        .footer-links { display: flex; gap: 22px; }
+        .footer-links a { font-size: .78rem; color: rgba(255,255,255,.3); text-decoration: none; transition: color .2s; }
+        .footer-links a:hover { color: var(--gold); }
+        @media (max-width: 600px) {
+            header { padding: 14px 20px; }
+            .support-card { padding: 40px 24px; }
+            footer { flex-direction: column; gap: 12px; padding: 20px; text-align: center; }
+        }
     </style>
 </head>
 <body>
-    <div class="contact-card">
-        <h2>We're here to help.</h2>
-        <p>If you're having issues with your account, AutoMatch, or just have a general question, drop us a line.</p>
-        
-        <a href="mailto:contact@linkapp.ca" class="email-btn">contact@linkapp.ca</a>
-        
-        <a href="index.html" class="nav-back">← Back to Home</a>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<header>
+    <a href="index.html" class="logo">
+        <div class="logo-mark">
+            <img src="AppIcon_1024.png" alt="Link" onerror="this.parentNode.style.background='var(--gold)'">
+        </div>
+        <span class="logo-name">Link</span>
+    </a>
+    <a href="index.html" class="back-link">← Back to Home</a>
+</header>
+
+<main>
+    <div class="support-card">
+        <img src="LinkerPeeking.png" alt="Linker" class="linker-img"
+             onerror="this.style.display='none'">
+        <h1 class="support-title">We're here to help.</h1>
+        <p class="support-body">
+            Having trouble with AutoMatch, your account, or Link AI? Drop us a message and we'll get back to you as soon as possible.
+        </p>
+
+        <a href="mailto:contact@linkapp.ca" class="email-btn">
+            ✉ contact@linkapp.ca
+        </a>
+
+        <div class="divider"></div>
+
+        <div class="faq-list">
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">How does AutoMatch work? <span class="faq-arr">▼</span></div>
+                <div class="faq-a">Every week, Link AI analyses profiles in your area — comparing values, personality, and lifestyle — to select one highly compatible match for you. New matches drop weekly.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">Why are photos blurred in AutoMatch? <span class="faq-arr">▼</span></div>
+                <div class="faq-a">To encourage genuine connections, AutoMatch photos stay blurred until both users have exchanged 3 messages. After that, profiles are fully revealed.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">What are LinkBucks / AI credits? <span class="faq-arr">▼</span></div>
+                <div class="faq-a">You receive daily AI credits to use for message generation, conversation openers, and chat analysis. You can earn them daily or purchase more in-app.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">How do I delete my account? <span class="faq-arr">▼</span></div>
+                <div class="faq-a">You can delete your account from the Profile → Settings screen in the app. All your data will be permanently removed. If you need assistance, email us.</div>
+            </div>
+        </div>
     </div>
+</main>
+
+<footer>
+    <div class="footer-copy">© 2026 ONTARIO 2717292 INC.</div>
+    <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+    </div>
+</footer>
+
+<script>
+const dot = document.getElementById('cur-dot');
+const ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    dot.style.left=mx+'px'; dot.style.top=my+'px';
+});
+(function loop() {
+    rx+=(mx-rx)*.11; ry+=(my-ry)*.11;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(loop);
+})();
+
+function toggleFaq(el) {
+    el.classList.toggle('open');
+}
+</script>
 </body>
 </html>
