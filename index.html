@@ -6,7 +6,7 @@
     <title>Link — AI-Powered Matchmaking</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #BEAA73; --gold-light: #E1CD96;
@@ -43,9 +43,11 @@
         .hero-pill { display:inline-flex;align-items:center;gap:8px;background:rgba(190,170,115,.1);border:1px solid rgba(190,170,115,.28);border-radius:100px;padding:7px 18px;font-size:.75rem;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold-light);margin-bottom:30px;animation:fadeUp .7s ease both; }
         .hero-pill-dot { width:6px;height:6px;background:var(--gold);border-radius:50%;animation:blink 2s infinite; }
         @keyframes blink { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.7);} }
-        .hero-h1 { font-family:'Cormorant Garamond',serif;font-size:clamp(3.8rem,9vw,8.5rem);font-weight:700;line-height:.95;letter-spacing:-2.5px;margin-bottom:26px;animation:fadeUp .85s .08s ease both; }
-        .hero-h1 .find-your { color:var(--gold);display:block; }
-        .hero-wordmark { height:clamp(55px,8.5vw,110px);width:auto;filter:brightness(0) invert(1);display:block;margin:10px auto 0; }
+        .hero-h1 { font-family:'DM Serif Display',serif;font-size:clamp(3.8rem,9vw,8.5rem);font-weight:400;line-height:.95;letter-spacing:-1px;margin-bottom:26px;animation:fadeUp .85s .08s ease both; }
+        /* "Find your" is white — logo carries the gold brand colour naturally */
+        .hero-h1 .find-your { color:#fff;display:block; }
+        /* Logo is larger so it commands the same visual weight as the text above */
+        .hero-wordmark { height:clamp(70px,10.5vw,140px);width:auto;filter:brightness(0) invert(1);display:block;margin:14px auto 0; }
         .hero-sub { font-size:clamp(1rem,1.8vw,1.18rem);color:rgba(255,255,255,.55);max-width:500px;margin:24px auto 50px;line-height:1.75;animation:fadeUp 1s .16s ease both; }
         .hero-ctas { display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp 1.1s .24s ease both; }
         .btn-gold { background:var(--gold);color:var(--navy-deep);padding:15px 34px;border-radius:100px;font-weight:700;font-size:.95rem;text-decoration:none;letter-spacing:.2px;transition:all .3s cubic-bezier(.25,.8,.25,1); }
@@ -63,55 +65,219 @@
         .reveal.up { opacity:1;transform:translateY(0); }
         .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.32s;}.d4{transition-delay:.44s;}
         .eyebrow { font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:16px; }
-        .section-h2 { font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,5.2rem);font-weight:700;line-height:1.02;letter-spacing:-1px;margin-bottom:20px; }
+        .section-h2 { font-family:'DM Serif Display',serif;font-size:clamp(2.6rem,5.5vw,5.2rem);font-weight:700;line-height:1.02;letter-spacing:-1px;margin-bottom:20px; }
         .section-h2 em { color:var(--gold);font-style:italic; }
         .section-p { font-size:1.05rem;color:rgba(255,255,255,.55);line-height:1.8;max-width:460px; }
 
-        /* ── PHONE PILE ── */
+        /* ── SHOWCASE ── */
         .showcase { padding:130px 60px 100px;background:var(--navy-deep); }
         .showcase-inner { max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center; }
-        .phone-pile { position:relative;height:560px; }
-        .pphone { position:absolute;width:210px;border-radius:38px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.07);transition:transform .6s cubic-bezier(.25,.8,.25,1); }
-        .pphone img { width:100%;display:block; }
-        .pphone-fallback { height:420px;display:flex;align-items:center;justify-content:center; }
-        .pphone:nth-child(1) { left:5%;top:0;z-index:1;transform:rotate(-6deg) translateY(30px); }
-        .pphone:nth-child(2) { left:28%;top:40px;z-index:2;transform:rotate(4deg) translateY(10px); }
-        .pphone:nth-child(3) { left:18%;top:80px;z-index:3;transform:rotate(-1.5deg); }
-        /* More aggressive splay */
-        .phone-pile:hover .pphone:nth-child(1) { transform:rotate(-14deg) translateX(-90px) translateY(-10px); }
-        .phone-pile:hover .pphone:nth-child(2) { transform:rotate(0deg) translateY(-20px) scale(1.03); }
-        .phone-pile:hover .pphone:nth-child(3) { transform:rotate(14deg) translateX(90px) translateY(-10px); }
 
         /* ── AUTOMATCH ── */
         .automatch { padding:130px 60px;background:var(--navy);position:relative;overflow:hidden; }
         .automatch::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 15% 50%,rgba(190,170,115,.07) 0%,transparent 70%),radial-gradient(ellipse 50% 70% at 85% 50%,rgba(30,37,53,.5) 0%,transparent 70%);pointer-events:none; }
-        .automatch-inner { max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative; }
-        .blur-card { border-radius:28px;overflow:hidden;aspect-ratio:3/4;background:linear-gradient(140deg,#2e3a55 0%,#1a2335 100%);position:relative;box-shadow:0 50px 100px rgba(0,0,0,.5); }
-        .blur-photo-layer { position:absolute;inset:0;background:radial-gradient(circle 200px at 50% 32%,rgba(225,205,150,.45) 0%,transparent 70%),linear-gradient(180deg,rgba(190,170,115,.12) 0%,rgba(30,37,55,.8) 100%);filter:blur(20px);transition:filter 1.2s ease; }
-        .blur-name-overlay { position:absolute;bottom:0;left:0;right:0;padding:32px 28px;background:linear-gradient(to top,rgba(13,18,30,.97) 0%,transparent 100%); }
-        .blur-name { font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:#fff;margin-bottom:10px; }
-        .blur-chips { display:flex;gap:8px;flex-wrap:wrap; }
-        .chip { background:rgba(190,170,115,.18);border:1px solid rgba(190,170,115,.3);color:var(--gold-light);padding:4px 12px;border-radius:100px;font-size:.76rem;font-weight:500; }
-        .blur-progress-row { position:absolute;top:22px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10; }
-        .bpdot { width:30px;height:4px;border-radius:2px;background:rgba(255,255,255,.18);transition:background .5s,transform .3s; }
-        .bpdot.lit { background:var(--gold);transform:scaleY(1.6); }
-        .blur-lock-badge { position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:12px;pointer-events:none;transition:opacity .6s; }
-        .lock-circle { width:52px;height:52px;background:rgba(255,255,255,.09);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center; }
-        .lock-circle svg { width:22px;height:22px;stroke:rgba(255,255,255,.8);fill:none;stroke-width:2; }
-        .lock-label { background:rgba(0,0,0,.45);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:7px 16px;font-size:.82rem;color:rgba(255,255,255,.75);white-space:nowrap; }
-        .blur-action-btn { position:absolute;bottom:116px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy-deep);border:none;border-radius:100px;padding:13px 28px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .3s;white-space:nowrap;z-index:20; }
-        .blur-action-btn:hover { background:var(--gold-light);transform:translateX(-50%) translateY(-2px);box-shadow:0 10px 24px rgba(190,170,115,.4); }
+        .automatch-inner { max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative; }
         .demo-hint { text-align:center;margin-top:14px;font-size:.76rem;color:rgba(255,255,255,.3); }
         .bullet-list { list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:12px; }
         .bullet-list li { display:flex;align-items:center;gap:12px;color:rgba(255,255,255,.65);font-size:.95rem; }
         .bullet-list li::before { content:'';width:7px;height:7px;background:var(--gold);border-radius:50%;flex-shrink:0; }
+        /* ── CSS PHONE MOCKUP ── */
+        .mock-phone {
+            width: 260px; border-radius: 42px;
+            background: var(--gold); /* app theme background */
+            overflow: hidden;
+            box-shadow: 0 40px 90px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08);
+            position: relative; flex-shrink: 0;
+        }
+        .mock-notch {
+            width: 90px; height: 28px;
+            background: #000; border-radius: 0 0 18px 18px;
+            margin: 0 auto 0; position: relative; z-index: 2;
+        }
+        .mock-photo {
+            height: 220px; background: linear-gradient(160deg,#3e4f68,#1c2535);
+            position: relative; overflow: hidden; margin: 8px 8px 0;
+            border-radius: 18px;
+        }
+        .mock-photo-grad {
+            position: absolute; inset: 0;
+            background: linear-gradient(0deg,rgba(0,0,0,.8) 0%,transparent 55%);
+        }
+        .mock-name-block {
+            position: absolute; bottom: 12px; left: 14px;
+        }
+        .mock-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.6rem; font-weight: 400; color: #fff; line-height: 1;
+        }
+        .mock-name span { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 400; opacity: .8; }
+        .mock-loc {
+            display: flex; align-items: center; gap: 4px;
+            font-size: .72rem; color: rgba(255,255,255,.7); margin-top: 4px;
+        }
+        .mock-prompt-card {
+            background: rgba(255,255,255,.55); backdrop-filter: blur(8px);
+            margin: 8px 8px 0; border-radius: 14px; padding: 10px 12px;
+        }
+        .mock-prompt-label { font-size: .62rem; color: rgba(30,30,30,.55); margin-bottom: 3px; }
+        .mock-prompt-ans { font-size: .8rem; color: rgba(30,30,30,.9); font-weight: 500; line-height: 1.3; }
+        .mock-info-row {
+            display: flex; gap: 8px; padding: 8px 8px 0; align-items: stretch;
+        }
+        .mock-info-left { flex: 1; }
+        .mock-photo-sm {
+            height: 80px; border-radius: 12px;
+            background: linear-gradient(135deg,#3e4244,#22282e);
+        }
+        .mock-info-right {
+            flex: 1; background: rgba(255,255,255,.45); backdrop-filter: blur(8px);
+            border-radius: 12px; padding: 8px 10px;
+            display: flex; flex-direction: column; gap: 5px; justify-content: center;
+        }
+        .mock-info-item {
+            display: flex; align-items: center; gap: 5px;
+            font-size: .65rem; color: rgba(30,30,30,.75); font-weight: 500;
+        }
+        .mock-dock {
+            display: flex; justify-content: space-around; align-items: center;
+            padding: 10px 14px 14px; margin-top: 8px;
+            background: rgba(225,205,150,.85); backdrop-filter: blur(10px);
+        }
+        .mock-dock-item {
+            width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+        }
+        .mock-dock-item svg { width: 20px; height: 20px; stroke: rgba(30,30,30,.45); }
+        .mock-dock-item.active svg { stroke: rgba(30,30,30,.9); }
+
+        /* ── NEW AUTOMATCH CARD (matches app layout) ── */
+        .am-card {
+            background: var(--gold);
+            border-radius: 28px; overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,.45);
+            position: relative;
+        }
+        /* Blurred photo area */
+        .am-photo-wrap {
+            height: 240px; position: relative; overflow: hidden;
+            background: linear-gradient(160deg, #d9ca98 0%, #f2ebd4 50%, #e8ddb8 100%);
+        }
+        .am-photo-blur {
+            position: absolute; inset: 0;
+            background: radial-gradient(circle 130px at 50% 40%, rgba(255,255,255,.9) 0%, rgba(235,218,168,.7) 50%, transparent 80%);
+            filter: blur(18px);
+            transition: filter 1.5s ease, opacity 1.5s ease;
+        }
+        .am-photo-blur.revealed { filter: blur(0); opacity: 0; }
+        /* Gray lock bar at bottom of photo — exactly like the app */
+        .am-lock-bar {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: rgba(90,90,90,.82); backdrop-filter: blur(6px);
+            padding: 10px 16px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-size: .82rem; color: rgba(255,255,255,.9); font-weight: 500;
+            transition: opacity .6s ease;
+        }
+        .am-lock-bar.hidden { opacity: 0; pointer-events: none; }
+        .am-revealed-badge {
+            position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,.55); border-radius: 100px;
+            padding: 6px 16px; font-size: .78rem; color: rgba(255,255,255,.9);
+            opacity: 0; transition: opacity .6s ease; white-space: nowrap;
+        }
+        .am-revealed-badge.show { opacity: 1; }
+        /* Profile body — uses app theme background */
+        .am-profile-body { padding: 14px 16px 16px; }
+        .am-name-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+        /* Name font matches app: large bold white */
+        .am-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.1rem; font-weight: 400; color: #fff; letter-spacing: -.5px;
+        }
+        .am-age { font-size: 1.1rem; color: rgba(255,255,255,.65); font-weight: 400; }
+        .am-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+        .am-chip {
+            display: flex; align-items: center; gap: 5px;
+            background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.25);
+            border-radius: 100px; padding: 4px 10px;
+            font-size: .72rem; color: rgba(255,255,255,.85); font-weight: 500;
+        }
+        .am-prompt-card {
+            background: rgba(255,255,255,.18); border-radius: 14px;
+            padding: 10px 12px; margin-bottom: 8px;
+        }
+        .am-prompt-label { font-size: .65rem; color: rgba(255,255,255,.55); margin-bottom: 3px; }
+        .am-prompt-ans { font-size: .85rem; color: rgba(255,255,255,.9); font-weight: 500; line-height: 1.4; }
+        /* Break the Ice — white full-width rounded, exactly as in app */
+        .am-break-btn {
+            width: 100%; background: #fff; color: #1a1a1a;
+            border: none; border-radius: 100px; padding: 15px;
+            font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700;
+            cursor: pointer; margin-top: 10px;
+            transition: all .25s;
+        }
+        .am-break-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.2); }
+        .am-break-btn:disabled { opacity: .4; cursor: default; transform: none; }
+        /* Mini chat thread inside the card */
+        .am-chat-thread {
+            background: #111317; padding: 14px 16px 16px;
+            max-height: 0; overflow: hidden;
+            transition: max-height .55s cubic-bezier(.25,.8,.25,1);
+        }
+        .am-chat-thread.open { max-height: 400px; }
+        .am-chat-header {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+            padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+        .am-chat-avatar {
+            width: 28px; height: 28px; border-radius: 7px;
+            background: linear-gradient(135deg, #5c4232, #2e1f11); flex-shrink: 0;
+        }
+        .am-chat-name { font-size: .88rem; font-weight: 700; color: #fff; }
+        .am-chat-sub { font-size: .65rem; color: rgba(255,255,255,.35); }
+        .am-chat-msgs { display: flex; flex-direction: column; gap: 7px; min-height: 60px; margin-bottom: 10px; }
+        .am-bubble {
+            max-width: 82%; padding: 8px 12px; border-radius: 16px;
+            font-size: .82rem; line-height: 1.4;
+            animation: bubIn .3s ease both;
+        }
+        @keyframes bubIn { from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);} }
+        .am-bubble.sent { background: rgba(190,170,115,.75); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
+        .am-bubble.recv { background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); border-bottom-left-radius: 4px; }
+        .am-typing { display: flex; gap: 3px; padding: 8px 12px; background: rgba(255,255,255,.08); border-radius: 16px; border-bottom-left-radius: 4px; width: 46px; }
+        .am-tdot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.45); animation: amBounce .8s ease-in-out infinite; }
+        .am-tdot:nth-child(2){animation-delay:.13s;}.am-tdot:nth-child(3){animation-delay:.26s;}
+        @keyframes amBounce{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-5px);}}
+        /* Progress dots */
+        .am-chat-progress-row {
+            display: flex; align-items: center; gap: 7px; margin-bottom: 10px;
+        }
+        .am-prog-dot {
+            width: 24px; height: 4px; border-radius: 2px;
+            background: rgba(255,255,255,.15); transition: background .4s, transform .3s;
+        }
+        .am-prog-dot.lit { background: var(--gold); transform: scaleY(1.5); }
+        .am-prog-label { font-size: .68rem; color: rgba(255,255,255,.35); flex: 1; }
+        .am-chat-send-btn {
+            width: 100%; background: var(--gold); color: var(--navy-deep);
+            border: none; border-radius: 12px; padding: 11px;
+            font-family: 'DM Sans', sans-serif; font-size: .88rem; font-weight: 700;
+            cursor: pointer; transition: background .2s; margin-bottom: 7px;
+        }
+        .am-chat-send-btn:hover { background: var(--gold-light); }
+        .am-chat-send-btn:disabled { opacity: .35; cursor: default; }
+        .am-chat-reset {
+            background: none; border: none; color: rgba(255,255,255,.3);
+            font-family: 'DM Sans', sans-serif; font-size: .72rem; cursor: pointer;
+            width: 100%; transition: color .2s;
+        }
+        .am-chat-reset:hover { color: rgba(255,255,255,.6); }
 
         /* ── COMING SOON AUTOMATCH CYCLE ── */
         .cycle-section { padding:80px 60px;background:var(--navy-dark);position:relative;overflow:hidden;border-top:1px solid rgba(190,170,115,.08);border-bottom:1px solid rgba(190,170,115,.08); }
         .cycle-section::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 50% 50%,rgba(190,170,115,.05) 0%,transparent 70%);pointer-events:none; }
         .cycle-inner { max-width:900px;margin:0 auto;text-align:center;position:relative; }
         .coming-badge { display:inline-flex;align-items:center;gap:8px;background:rgba(190,170,115,.12);border:1px solid rgba(190,170,115,.3);border-radius:100px;padding:7px 18px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);margin-bottom:24px; }
-        .cycle-h2 { font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:700;letter-spacing:-.5px;margin-bottom:16px;color:#fff; }
+        .cycle-h2 { font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:700;letter-spacing:-.5px;margin-bottom:16px;color:#fff; }
         .cycle-h2 em { color:var(--gold);font-style:italic; }
         .cycle-p { font-size:1rem;color:rgba(255,255,255,.5);line-height:1.7;max-width:520px;margin:0 auto 40px; }
         .cycle-days { display:flex;justify-content:center;gap:0;flex-wrap:nowrap;margin:0 auto 32px;max-width:700px; }
@@ -136,7 +302,7 @@
         .pcard-img { height:290px;display:flex;align-items:flex-end;position:relative;overflow:hidden; }
         .pcard-img-bg { position:absolute;inset:0; }
         .pcard-img::after { content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,transparent 55%); }
-        .pcard-person { position:relative;z-index:1;padding:18px 20px;font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;color:#fff; }
+        .pcard-person { position:relative;z-index:1;padding:18px 20px;font-family:'DM Serif Display',serif;font-size:1.9rem;font-weight:700;color:#fff; }
         .pcard-person span { font-size:1.2rem;font-weight:400;opacity:.8; }
         .pcard-body { background:var(--navy-deep);padding:16px 20px; }
         .pcard-prompt-label { font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:4px; }
@@ -169,7 +335,7 @@
         .feat-card:hover::after { opacity:1; }
         .feat-icon { width:52px;height:52px;background:rgba(190,170,115,.1);border:1px solid rgba(190,170,115,.2);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:var(--gold); }
         .feat-icon svg { width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round; }
-        .feat-title { font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;margin-bottom:10px; }
+        .feat-title { font-family:'DM Serif Display',serif;font-size:1.55rem;font-weight:600;margin-bottom:10px; }
         .feat-desc { font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.7; }
         .feat-wide { grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center; }
         .feat-wide-visual { height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,rgba(190,170,115,.1),rgba(30,37,53,.5));display:flex;align-items:center;justify-content:center;border:1px solid rgba(190,170,115,.12); }
@@ -293,7 +459,7 @@
         .cta-wrap { padding:160px 60px;text-align:center;background:var(--navy-deep);position:relative;overflow:hidden; }
         .cta-wrap::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(190,170,115,.07) 0%,transparent 70%);pointer-events:none; }
         .cta-inner { position:relative;max-width:600px;margin:0 auto; }
-        .cta-h2 { font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6.5rem);font-weight:700;line-height:.95;letter-spacing:-2px;margin-bottom:24px; }
+        .cta-h2 { font-family:'DM Serif Display',serif;font-size:clamp(3rem,7vw,6.5rem);font-weight:700;line-height:.95;letter-spacing:-2px;margin-bottom:24px; }
         .cta-wordmark { height:clamp(44px,7vw,90px);width:auto;filter:brightness(0) invert(1);display:inline-block;vertical-align:middle; }
         .cta-h2 .find-em { color:var(--gold);font-style:italic; }
         .cta-p { font-size:1.05rem;color:rgba(255,255,255,.5);margin-bottom:50px;line-height:1.75; }
@@ -328,7 +494,7 @@
         .wl-close-btn { position:absolute;top:20px;right:20px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s; }
         .wl-close-btn:hover { background:rgba(255,255,255,.12);color:#fff; }
         .wl-linker { width:80px;height:80px;object-fit:contain;mix-blend-mode:screen;margin:0 auto 22px;display:block;animation:mascotFloat 5s ease-in-out infinite; }
-        .wl-title { font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;margin-bottom:12px; }
+        .wl-title { font-family:'DM Serif Display',serif;font-size:2.2rem;font-weight:700;margin-bottom:12px; }
         .wl-title em { color:var(--gold);font-style:italic; }
         .wl-sub { font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:30px; }
         .wl-form { display:flex;flex-direction:column;gap:12px; }
@@ -339,7 +505,7 @@
         .wl-submit:hover { background:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 24px rgba(190,170,115,.3); }
         .wl-success { display:none;text-align:center; }
         .wl-success-icon { font-size:3rem;margin-bottom:16px; }
-        .wl-success-title { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold-light);margin-bottom:10px; }
+        .wl-success-title { font-family:'DM Serif Display',serif;font-size:2rem;font-weight:700;color:var(--gold-light);margin-bottom:10px; }
         .wl-success-sub { font-size:.9rem;color:rgba(255,255,255,.5); }
         .wl-disclaimer { font-size:.72rem;color:rgba(255,255,255,.3);margin-top:12px; }
 
@@ -382,7 +548,7 @@
         </div>
         <!-- Logo image replaces text "Link" -->
         <img src="LinkLogo_all_white.png" alt="Link" class="logo-wordmark"
-             onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\'font-family:Cormorant Garamond,serif;font-size:1.55rem;font-weight:600;color:var(--gold-light);letter-spacing:.5px;\'>Link</span>')">
+             onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\'font-family:DM Serif Display,serif;font-size:1.55rem;font-weight:600;color:var(--gold-light);letter-spacing:.5px;\'>Link</span>')">
     </a>
     <nav>
         <a href="#automatch">AutoMatch</a>
@@ -421,38 +587,76 @@
 ═══════════════════════════════ -->
 <section class="showcase" id="app-preview">
     <div class="showcase-inner">
-        <div class="phone-pile reveal">
-            <div class="pphone">
-                <div class="pphone-fallback" style="background:linear-gradient(160deg,#3d5070 0%,#1e2a40 100%);">
-                    <!-- CPU icon inline SVG -->
-                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(190,170,115,.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/>
-                        <line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/>
-                        <line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/>
-                        <line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/>
-                        <line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
-                    </svg>
+
+        <!-- CSS phone mockup matching the app's actual profile card layout -->
+        <div class="reveal" style="display:flex;justify-content:center;align-items:center;">
+            <div class="mock-phone">
+                <div class="mock-notch"></div>
+                <!-- Profile photo area -->
+                <div class="mock-photo">
+                    <div class="mock-photo-grad"></div>
+                    <div class="mock-name-block">
+                        <div class="mock-name">Jordan, <span>23</span></div>
+                        <div class="mock-loc">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Distillery District
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="pphone">
-                <div class="pphone-fallback" style="background:linear-gradient(160deg,#4a3825 0%,#2a1f10 100%);">
-                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="rgba(190,170,115,.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
+                <!-- Prompt card -->
+                <div class="mock-prompt-card">
+                    <div class="mock-prompt-label">My ideal Sunday looks like...</div>
+                    <div class="mock-prompt-ans">Brunch at St. Lawrence Market, then a long nap with my dog.</div>
                 </div>
-            </div>
-            <div class="pphone">
-                <div class="pphone-fallback" style="background:linear-gradient(160deg,#1a1a2e 0%,#0d1120 100%);">
-                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="rgba(190,170,115,.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
+                <!-- Info grid -->
+                <div class="mock-info-row">
+                    <div class="mock-info-left">
+                        <div class="mock-photo-sm"></div>
+                    </div>
+                    <div class="mock-info-right">
+                        <div class="mock-info-item">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            Financial Analyst
+                        </div>
+                        <div class="mock-info-item">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                            U of T
+                        </div>
+                        <div class="mock-info-item">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                            5' 11"
+                        </div>
+                        <div class="mock-info-item">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                            Extrovert
+                        </div>
+                    </div>
+                </div>
+                <!-- Dock -->
+                <div class="mock-dock">
+                    <div class="mock-dock-item active">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <div class="mock-dock-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                    </div>
+                    <div class="mock-dock-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </div>
+                    <div class="mock-dock-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <div class="mock-dock-item mock-dock-avatar">
+                        <div style="width:18px;height:18px;border-radius:5px;background:rgba(190,170,115,.5);border:1.5px solid rgba(255,255,255,.5);"></div>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="reveal d2">
             <span class="eyebrow">The App</span>
             <h2 class="section-h2">Dating,<br><em>reimagined</em></h2>
-            <p class="section-p">Link combines scroll-and-like discovery with the intelligence of AI matchmaking. Every feature is designed to help you connect more deeply, with far less effort.</p>
+            <p class="section-p">Link combines prompt-driven profiles with AI matchmaking. Every feature is designed to help you connect more deeply, with far less effort.</p>
             <br><br>
             <a href="#" class="btn-gold" style="display:inline-block;" onclick="openWaitlist();return false;">Join the Waitlist</a>
         </div>
@@ -476,30 +680,79 @@
             </ul>
         </div>
         <div class="reveal d2">
-            <div class="blur-card" id="blurCard">
-                <div class="blur-photo-layer" id="blurPhotoLayer"></div>
-                <div class="blur-progress-row">
-                    <div class="bpdot" id="bp0"></div>
-                    <div class="bpdot" id="bp1"></div>
-                    <div class="bpdot" id="bp2"></div>
-                </div>
-                <div class="blur-lock-badge" id="blurLockBadge">
-                    <div class="lock-circle">
-                        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <!-- AutoMatch profile card — matches actual app layout -->
+            <div class="am-card" id="amCard">
+
+                <!-- Blurred photo area -->
+                <div class="am-photo-wrap" id="amPhotoWrap">
+                    <div class="am-photo-blur" id="amPhotoBlur"></div>
+                    <!-- Lock bar — shown until photos revealed -->
+                    <div class="am-lock-bar" id="amLockBar">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <span id="amLockLabel">Send 3 messages to reveal</span>
                     </div>
-                    <div class="lock-label">Send 3 messages to reveal</div>
+                    <!-- Revealed state overlay — hidden until unlocked -->
+                    <div class="am-revealed-badge" id="amRevealedBadge">✓ Photos revealed</div>
                 </div>
-                <button class="blur-action-btn" id="blurBtn" onclick="stepBlur()">✦ Break the Ice</button>
-                <div class="blur-name-overlay">
-                    <div class="blur-name">Zara, 22</div>
-                    <div class="blur-chips">
-                        <span class="chip">Mississauga</span>
-                        <span class="chip">Marketing at Rogers</span>
-                        <span class="chip">Western '25</span>
+
+                <!-- Profile info below photo -->
+                <div class="am-profile-body">
+                    <div class="am-name-row">
+                        <span class="am-name">Zara</span>
+                        <span class="am-age">22</span>
                     </div>
+                    <div class="am-chips">
+                        <span class="am-chip">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Mississauga
+                        </span>
+                        <span class="am-chip">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                            Marketing at Rogers
+                        </span>
+                        <span class="am-chip">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                            5' 6"
+                        </span>
+                    </div>
+
+                    <!-- Prompt cards -->
+                    <div class="am-prompt-card">
+                        <div class="am-prompt-label">My ideal Sunday looks like...</div>
+                        <div class="am-prompt-ans">Sketching at a Kensington café until it gets too loud, then home.</div>
+                    </div>
+                    <div class="am-prompt-card">
+                        <div class="am-prompt-label">A controversial opinion I stand by...</div>
+                        <div class="am-prompt-ans">Tea is better than coffee. Not sorry.</div>
+                    </div>
+
+                    <!-- Break the Ice button — white, full-width, rounded (matches app) -->
+                    <button class="am-break-btn" id="amBreakBtn" onclick="startBreakTheIce()">
+                        Break the ice
+                    </button>
+                </div>
+
+                <!-- Mini chat thread — slides in after Break the Ice -->
+                <div class="am-chat-thread" id="amChatThread">
+                    <div class="am-chat-header">
+                        <div class="am-chat-avatar"></div>
+                        <div>
+                            <div class="am-chat-name">Zara</div>
+                            <div class="am-chat-sub">AutoMatch — photos unlock after exchange</div>
+                        </div>
+                    </div>
+                    <div class="am-chat-msgs" id="amChatMsgs"></div>
+                    <div class="am-chat-progress-row">
+                        <div class="am-prog-dot" id="apd0"></div>
+                        <div class="am-prog-dot" id="apd1"></div>
+                        <div class="am-prog-dot" id="apd2"></div>
+                        <span class="am-prog-label" id="amProgLabel">Exchange messages to reveal photos</span>
+                    </div>
+                    <button class="am-chat-send-btn" id="amSendBtn" onclick="sendAmMessage()">Send a message →</button>
+                    <button class="am-chat-reset" onclick="resetAmDemo()">Start over</button>
                 </div>
             </div>
-            <p class="demo-hint">Interactive demo — click "Break the Ice" to progress</p>
+            <p class="demo-hint">Click "Break the ice" to try the AutoMatch demo</p>
         </div>
     </div>
 </section>
@@ -789,7 +1042,7 @@
         <div class="footer-top">
             <div>
                 <img src="LinkLogo_all_white.png" alt="Link" class="footer-brand-wordmark"
-                     onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div style=\'font-family:Cormorant Garamond,serif;font-size:1.9rem;font-weight:600;color:var(--gold-light);margin-bottom:10px;\'>Link</div>')">
+                     onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div style=\'font-family:DM Serif Display,serif;font-size:1.9rem;font-weight:600;color:var(--gold-light);margin-bottom:10px;\'>Link</div>')">
                 <p class="footer-brand-tag">AI-powered matchmaking. Find your link without the endless swiping.</p>
             </div>
             <div class="footer-cols">
@@ -953,30 +1206,128 @@ const revEls = document.querySelectorAll('.reveal');
 const ro = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('up'); }); }, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
 revEls.forEach(el => ro.observe(el));
 
-/* ─── BLUR DEMO ─── */
-let blurSteps = 0;
-function stepBlur(){
-    if(blurSteps >= 3){ resetBlur(); return; }
-    blurSteps++;
-    const dotEl = document.getElementById(`bp${blurSteps-1}`);
-    if(dotEl) dotEl.classList.add('lit');
-    document.getElementById('blurPhotoLayer').style.filter = `blur(${Math.max(0,20-blurSteps*7)}px)`;
-    if(blurSteps >= 3){
-        document.getElementById('blurLockBadge').style.opacity = '0';
-        const btn = document.getElementById('blurBtn');
-        btn.textContent = '✓ Revealed — tap to reset';
-        btn.style.background = 'rgba(255,255,255,.14)'; btn.style.color = '#fff';
+/* ─── AUTOMATCH BREAK THE ICE DEMO ─── */
+var amStep = 0; // 0=idle, 1=chatOpen, 2=sent1, 3=recv1, 4=sent2 (revealed)
+var amSending = false;
+
+var amMessages = [
+    { side:'sent', text:"Hey, Link AI matched us — wanted to say hi 👋" },
+    { side:'recv', text:"Oh hi! Yeah I was actually curious to see who my match was this week 😄" },
+    { side:'sent', text:"Same honestly. Your Kensington café Sunday sounds exactly like mine. Do you sketch anything specific?" }
+];
+
+function startBreakTheIce() {
+    if(amStep > 0) return;
+    amStep = 1;
+    document.getElementById('amBreakBtn').disabled = true;
+    document.getElementById('amBreakBtn').textContent = 'Chat started ✓';
+    document.getElementById('amChatThread').classList.add('open');
+    document.getElementById('amChatMsgs').innerHTML = '';
+}
+
+function sendAmMessage() {
+    if(amSending || amStep === 0) return;
+    var btn = document.getElementById('amSendBtn');
+    if(amStep >= 4) return; // already done
+
+    amSending = true;
+    btn.disabled = true;
+
+    var msgs = document.getElementById('amChatMsgs');
+    var msgData = amMessages[amStep - 1];
+    if(!msgData) { amSending = false; return; }
+
+    // Add sent bubble
+    var bubble = document.createElement('div');
+    bubble.className = 'am-bubble ' + msgData.side;
+    bubble.textContent = msgData.text;
+    msgs.appendChild(bubble);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    // Light progress dot for every sent message
+    if(msgData.side === 'sent') {
+        var dotIdx = amStep === 1 ? 0 : (amStep === 4 ? 2 : -1);
+        if(amStep === 1) { var d0 = document.getElementById('apd0'); if(d0) d0.classList.add('lit'); }
+        if(amStep === 3) { var d2 = document.getElementById('apd2'); if(d2) d2.classList.add('lit'); }
+    }
+
+    amStep++;
+
+    // If there's a follow-up received message, show typing then reply
+    var nextMsg = amMessages[amStep - 1];
+    if(nextMsg && nextMsg.side === 'recv') {
+        setTimeout(function() {
+            var typing = document.createElement('div');
+            typing.className = 'am-typing';
+            typing.innerHTML = '<div class="am-tdot"></div><div class="am-tdot"></div><div class="am-tdot"></div>';
+            msgs.appendChild(typing);
+            msgs.scrollTop = msgs.scrollHeight;
+
+            setTimeout(function() {
+                msgs.removeChild(typing);
+                var replyBubble = document.createElement('div');
+                replyBubble.className = 'am-bubble recv';
+                replyBubble.textContent = nextMsg.text;
+                msgs.appendChild(replyBubble);
+                msgs.scrollTop = msgs.scrollHeight;
+
+                // Light middle progress dot after first reply
+                var d1 = document.getElementById('apd1');
+                if(d1) d1.classList.add('lit');
+                document.getElementById('amProgLabel').textContent = 'Send one more to reveal photos';
+
+                amStep++;
+                amSending = false;
+                btn.disabled = false;
+                btn.textContent = 'Send final message →';
+            }, 1800);
+        }, 600);
+    } else if(amStep - 1 === 2) {
+        // Final sent message — trigger reveal
+        setTimeout(function() {
+            triggerAmReveal();
+            amSending = false;
+        }, 500);
     } else {
-        document.getElementById('blurBtn').textContent = `Message ${blurSteps} sent · ${3-blurSteps} more to unlock`;
+        amSending = false;
+        btn.disabled = false;
     }
 }
-function resetBlur(){
-    blurSteps = 0;
-    [0,1,2].forEach(i => { const d=document.getElementById(`bp${i}`); if(d) d.classList.remove('lit'); });
-    document.getElementById('blurPhotoLayer').style.filter = '';
-    document.getElementById('blurLockBadge').style.opacity = '1';
-    const btn = document.getElementById('blurBtn');
-    btn.textContent = '✦ Break the Ice'; btn.style.background = ''; btn.style.color = '';
+
+function triggerAmReveal() {
+    // Blur lifts
+    document.getElementById('amPhotoBlur').classList.add('revealed');
+    document.getElementById('amLockBar').classList.add('hidden');
+    document.getElementById('amRevealedBadge').classList.add('show');
+    // Progress dots all lit
+    ['apd0','apd1','apd2'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if(el) el.classList.add('lit');
+    });
+    document.getElementById('amProgLabel').textContent = 'Photos revealed! 🎉';
+    var btn = document.getElementById('amSendBtn');
+    btn.textContent = 'Photos unlocked ✓';
+    btn.disabled = true;
+}
+
+function resetAmDemo() {
+    amStep = 0; amSending = false;
+    document.getElementById('amPhotoBlur').classList.remove('revealed');
+    document.getElementById('amLockBar').classList.remove('hidden');
+    document.getElementById('amRevealedBadge').classList.remove('show');
+    ['apd0','apd1','apd2'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if(el) el.classList.remove('lit');
+    });
+    document.getElementById('amProgLabel').textContent = 'Exchange messages to reveal photos';
+    document.getElementById('amChatMsgs').innerHTML = '';
+    document.getElementById('amChatThread').classList.remove('open');
+    var breakBtn = document.getElementById('amBreakBtn');
+    breakBtn.disabled = false;
+    breakBtn.textContent = 'Break the ice';
+    var sendBtn = document.getElementById('amSendBtn');
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send a message →';
 }
 
 /* ─── CARD 3D TILT ─── */
