@@ -80,19 +80,24 @@
             box-shadow:0 50px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.07),
                        inset 0 1px 0 rgba(255,255,255,.15);
             position:relative; flex-shrink:0; cursor:pointer;
+            /* Fixed height so every screen is identical — no layout shift */
+            height:570px; display:flex; flex-direction:column;
         }
         .screen-notch {
             width:88px; height:26px; background:#000;
             border-radius:0 0 16px 16px; margin:0 auto;
-            position:relative; z-index:5;
+            position:relative; z-index:5; flex-shrink:0;
         }
-        /* Individual screens — stacked, shown one at a time */
-        .phone-screen { display:none; animation:screenFadeIn .4s ease both; }
-        .phone-screen.active { display:block; }
+        /* All screens fill the remaining space */
+        .phone-screen {
+            display:none; animation:screenFadeIn .4s ease both;
+            flex:1; overflow:hidden; display:none; flex-direction:column;
+        }
+        .phone-screen.active { display:flex; }
         @keyframes screenFadeIn { from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);} }
 
         /* Screen 1: Discover */
-        .sc-discover { background:var(--gold); }
+        .sc-discover { background:var(--gold); flex:1; display:flex; flex-direction:column; overflow:hidden; }
         .sc-topbar { display:flex;justify-content:space-between;align-items:center;padding:8px 16px 4px; }
         .sc-topbar-icon { width:18px;height:18px;opacity:.55; }
         .sc-topbar-icon svg { width:100%;height:100%;stroke:rgba(30,30,30,.7);fill:none;stroke-width:2;stroke-linecap:round; }
@@ -112,10 +117,10 @@
         .sc-info-row svg { width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2.5; }
 
         /* Screen 2: AutoMatch */
-        .sc-automatch { background:var(--gold); }
-        .sc-am-header { padding:10px 16px 6px;display:flex;justify-content:space-between;align-items:center; }
+        .sc-automatch { background:var(--gold); flex:1; display:flex; flex-direction:column; overflow:hidden; }
+        .sc-am-header { padding:10px 16px 6px;display:flex;justify-content:space-between;align-items:center; flex-shrink:0; }
         .sc-am-title { font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;font-weight:400; }
-        .sc-am-body { padding:10px 16px; text-align:center; }
+        .sc-am-body { padding:10px 16px; text-align:center; flex:1; display:flex; flex-direction:column; justify-content:center; }
         .sc-cpu-wrap { width:52px;height:52px;background:rgba(255,255,255,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px; }
         .sc-cpu-wrap svg { width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round; }
         .sc-am-h2 { font-family:'DM Serif Display',serif;font-size:1.25rem;color:#fff;margin-bottom:8px;line-height:1.2; }
@@ -127,7 +132,7 @@
         .sc-enable-btn { background:#fff;color:#1a1a1a;border:none;border-radius:100px;padding:11px 0;width:100%;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;cursor:default;margin-top:4px; }
 
         /* Screen 3: Likes You */
-        .sc-likes { background:linear-gradient(160deg,#c9b878,#beaa73); }
+        .sc-likes { background:linear-gradient(160deg,#c9b878,#beaa73); flex:1; display:flex; flex-direction:column; overflow:hidden; }
         .sc-likes-header { padding:12px 16px 8px;font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;font-weight:400; }
         .sc-like-card { background:rgba(255,255,255,.22);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.3);margin:0 10px;border-radius:18px;overflow:hidden; }
         .sc-like-card-top { display:flex;align-items:center;gap:10px;padding:10px 12px; }
@@ -145,7 +150,7 @@
         .sc-match-btn { flex:1;background:rgba(255,255,255,.55);border-radius:100px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:rgba(30,30,30,.8);padding:9px; }
 
         /* Screen 4: Chat */
-        .sc-chat { background:#0d0d11; }
+        .sc-chat { background:#0d0d11; flex:1; display:flex; flex-direction:column; overflow:hidden; }
         .sc-chat-nav { display:flex;align-items:center;gap:8px;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.06); }
         .sc-chat-back { color:rgba(255,255,255,.5);font-size:.8rem; }
         .sc-chat-avatar { width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#5c4232,#2e1f11);flex-shrink:0; }
@@ -469,7 +474,7 @@
         .reaction-msg-input { background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 16px;font-size:.85rem;color:rgba(255,255,255,.5);font-family:'DM Sans',sans-serif;width:100%;margin-bottom:12px;outline:none; }
         .reaction-btns { display:flex;gap:10px; }
         .rbtn-cancel { flex:1;background:rgba(255,255,255,.1);border:none;border-radius:14px;padding:12px;color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;font-size:.85rem;cursor:pointer;transition:all .2s; }
-        .rbtn-send { flex:1.5;background:var(--gold);border:none;border-radius:14px;padding:12px;color:var(--navy-deep);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s; }
+        .rbtn-send { width:100%;background:var(--gold);border:none;border-radius:14px;padding:12px;color:var(--navy-deep);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s; }
         .rbtn-send:hover { background:var(--gold-light); }
 
         /* Expanded messages panel */
@@ -597,7 +602,7 @@
             nav a:not(.nav-cta) { display:none; }
             .showcase,.automatch,.discover,.features,.credits-section,.mascot-section,.cta-wrap,.proof-strip,.cycle-section { padding:80px 22px; }
             .showcase-inner,.automatch-inner,.discover-inner,.credits-inner { grid-template-columns:1fr;gap:48px; }
-            .phone-pile { height:320px; }
+            .screen-phone { width:220px; }
             .features-grid { grid-template-columns:1fr; }
             .feat-wide { grid-column:span 1;display:block; }
             .proof-inner { grid-template-columns:1fr;gap:28px; }
@@ -818,78 +823,6 @@
         </div>
     </div>
 </section>
-                <div class="mock-notch"></div>
-                <!-- Profile photo area -->
-                <div class="mock-photo">
-                    <div class="mock-photo-grad"></div>
-                    <div class="mock-name-block">
-                        <div class="mock-name">Jordan, <span>23</span></div>
-                        <div class="mock-loc">
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            Distillery District
-                        </div>
-                    </div>
-                </div>
-                <!-- Prompt card -->
-                <div class="mock-prompt-card">
-                    <div class="mock-prompt-label">My ideal Sunday looks like...</div>
-                    <div class="mock-prompt-ans">Brunch at St. Lawrence Market, then a long nap with my dog.</div>
-                </div>
-                <!-- Info grid -->
-                <div class="mock-info-row">
-                    <div class="mock-info-left">
-                        <div class="mock-photo-sm"></div>
-                    </div>
-                    <div class="mock-info-right">
-                        <div class="mock-info-item">
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                            Financial Analyst
-                        </div>
-                        <div class="mock-info-item">
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                            U of T
-                        </div>
-                        <div class="mock-info-item">
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                            5' 11"
-                        </div>
-                        <div class="mock-info-item">
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                            Extrovert
-                        </div>
-                    </div>
-                </div>
-                <!-- Dock -->
-                <div class="mock-dock">
-                    <div class="mock-dock-item active">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    </div>
-                    <div class="mock-dock-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
-                    </div>
-                    <div class="mock-dock-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    </div>
-                    <div class="mock-dock-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                    </div>
-                    <div class="mock-dock-item mock-dock-avatar">
-                        <div style="width:18px;height:18px;border-radius:5px;background:rgba(190,170,115,.5);border:1.5px solid rgba(255,255,255,.5);"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="reveal d2">
-            <span class="eyebrow">The App</span>
-            <h2 class="section-h2">Dating,<br><em>reimagined</em></h2>
-            <p class="section-p">Link combines prompt-driven profiles with AI matchmaking. Every feature is designed to help you connect more deeply, with far less effort.</p>
-            <br><br>
-            <a href="#" class="btn-gold" style="display:inline-block;" onclick="openWaitlist();return false;">Join the Waitlist</a>
-        </div>
-    </div>
-</section>
-
 <!-- ═══════════════════════════════
      AUTOMATCH
 ═══════════════════════════════ -->
@@ -970,21 +903,10 @@
                             <div class="am-prog-dot" id="apd2"></div>
                             <span class="am-prog-label" id="amProgLabel">Start the conversation</span>
                         </div>
-                        <button class="am-chat-send-btn" id="amSendBtn" onclick="sendAmMessage()">Send a message →</button>
+                        <button class="am-chat-send-btn" id="amSendBtn" onclick="sendAmMessage()">Send message →</button>
                         <button class="am-chat-reset" onclick="resetAmDemo()">Start over</button>
                     </div>
                 </div>
-                    <div class="am-chat-msgs" id="amChatMsgs"></div>
-                    <div class="am-chat-progress-row">
-                        <div class="am-prog-dot" id="apd0"></div>
-                        <div class="am-prog-dot" id="apd1"></div>
-                        <div class="am-prog-dot" id="apd2"></div>
-                        <span class="am-prog-label" id="amProgLabel">Exchange messages to reveal photos</span>
-                    </div>
-                    <button class="am-chat-send-btn" id="amSendBtn" onclick="sendAmMessage()">Send a message →</button>
-                    <button class="am-chat-reset" onclick="resetAmDemo()">Start over</button>
-                </div>
-            </div>
             <p class="demo-hint">Click "Break the ice" to try the AutoMatch demo</p>
         </div>
     </div>
@@ -1487,129 +1409,155 @@ function fireSiriGlow(ring1Id, ring2Id) {
 }
 
 
-var amStep = 0; // 0=idle, 1=chatOpen, 2=sent1, 3=recv1, 4=sent2 (revealed)
-var amSending = false;
+/* ─── AUTOMATCH BREAK THE ICE DEMO ─── */
+/*
+ * State machine:
+ *  0 = idle (before Break the Ice)
+ *  1 = chat open, waiting for user's first message
+ *  2 = user sent msg 1, auto-reply in progress
+ *  3 = reply received, waiting for user's final message
+ *  4 = done (photos revealed)
+ */
+var amStep = 0;
+var amBusy = false;
 
-var amMessages = [
-    { side:'sent', text:"Hey, Link AI matched us — wanted to say hi 👋" },
-    { side:'recv', text:"Oh hi! Yeah I was actually curious to see who my match was this week 😄" },
-    { side:'sent', text:"Same honestly. Your Kensington café Sunday sounds exactly like mine. Do you sketch anything specific?" }
+var amConvo = [
+    "Hey, Link AI matched us this week — wanted to say hi 👋",
+    "Oh hi! Yeah I was curious to see who my match would be 😄",
+    "Same honestly. Your Kensington café sketching Sunday sounds exactly like mine."
 ];
 
 function startBreakTheIce() {
-    if(amStep > 0) return;
+    if(amStep !== 0) return;
     amStep = 1;
-    // Fire Siri glow on Break the Ice
     fireSiriGlow('amRing1', 'amRing2');
-    document.getElementById('amBreakBtn').disabled = true;
-    document.getElementById('amBreakBtn').textContent = 'Chat started ✓';
+    var breakBtn = document.getElementById('amBreakBtn');
+    breakBtn.disabled = true;
+    breakBtn.textContent = 'Chat started ✓';
     document.getElementById('amChatThread').classList.add('open');
     document.getElementById('amChatMsgs').innerHTML = '';
+    setAmLabel('Start the conversation to reveal photos');
 }
 
 function sendAmMessage() {
-    if(amSending || amStep === 0) return;
-    var btn = document.getElementById('amSendBtn');
-    if(amStep >= 4) return; // already done
+    if(amBusy || amStep === 0 || amStep === 4) return;
+    if(amStep === 2) return; // mid-auto-reply, wait
 
-    amSending = true;
+    var btn = document.getElementById('amSendBtn');
+    var msgs = document.getElementById('amChatMsgs');
+    amBusy = true;
     btn.disabled = true;
 
-    var msgs = document.getElementById('amChatMsgs');
-    var msgData = amMessages[amStep - 1];
-    if(!msgData) { amSending = false; return; }
-
-    // Add sent bubble
-    var bubble = document.createElement('div');
-    bubble.className = 'am-bubble ' + msgData.side;
-    bubble.textContent = msgData.text;
-    msgs.appendChild(bubble);
-    msgs.scrollTop = msgs.scrollHeight;
-
-    // Light progress dot for every sent message
-    if(msgData.side === 'sent') {
-        var dotIdx = amStep === 1 ? 0 : (amStep === 4 ? 2 : -1);
-        if(amStep === 1) { var d0 = document.getElementById('apd0'); if(d0) d0.classList.add('lit'); }
-        if(amStep === 3) { var d2 = document.getElementById('apd2'); if(d2) d2.classList.add('lit'); }
-    }
-
-    amStep++;
-
-    // If there's a follow-up received message, show typing then reply
-    var nextMsg = amMessages[amStep - 1];
-    if(nextMsg && nextMsg.side === 'recv') {
+    if(amStep === 1) {
+        // User sends first message
+        addAmBubble(msgs, 'sent', amConvo[0]);
+        lightAmDot(0);
+        amStep = 2;
+        // Auto reply after delay
         setTimeout(function() {
-            var typing = document.createElement('div');
-            typing.className = 'am-typing';
-            typing.innerHTML = '<div class="am-tdot"></div><div class="am-tdot"></div><div class="am-tdot"></div>';
-            msgs.appendChild(typing);
-            msgs.scrollTop = msgs.scrollHeight;
-
-            setTimeout(function() {
-                msgs.removeChild(typing);
-                var replyBubble = document.createElement('div');
-                replyBubble.className = 'am-bubble recv';
-                replyBubble.textContent = nextMsg.text;
-                msgs.appendChild(replyBubble);
-                msgs.scrollTop = msgs.scrollHeight;
-
-                // Light middle progress dot after first reply
-                var d1 = document.getElementById('apd1');
-                if(d1) d1.classList.add('lit');
-                document.getElementById('amProgLabel').textContent = 'Send one more to reveal photos';
-
-                amStep++;
-                amSending = false;
+            showAmTyping(msgs, function() {
+                addAmBubble(msgs, 'recv', amConvo[1]);
+                lightAmDot(1);
+                amStep = 3;
+                amBusy = false;
                 btn.disabled = false;
-                btn.textContent = 'Send final message →';
-            }, 1800);
-        }, 600);
-    } else if(amStep - 1 === 2) {
-        // Final sent message — trigger reveal
+                btn.textContent = 'Send message →';
+                setAmLabel('Send one more message to reveal photos');
+            });
+        }, 500);
+
+    } else if(amStep === 3) {
+        // User sends final message — triggers reveal
+        addAmBubble(msgs, 'sent', amConvo[2]);
+        lightAmDot(2);
+        amStep = 4;
         setTimeout(function() {
             triggerAmReveal();
-            amSending = false;
-        }, 500);
-    } else {
-        amSending = false;
-        btn.disabled = false;
+            amBusy = false;
+        }, 600);
     }
 }
 
+function addAmBubble(container, side, text) {
+    var b = document.createElement('div');
+    b.className = 'am-bubble ' + side;
+    b.textContent = text;
+    container.appendChild(b);
+    container.scrollTop = container.scrollHeight;
+}
+
+function showAmTyping(container, callback) {
+    var t = document.createElement('div');
+    t.className = 'am-typing';
+    t.innerHTML = '<div class="am-tdot"></div><div class="am-tdot"></div><div class="am-tdot"></div>';
+    container.appendChild(t);
+    container.scrollTop = container.scrollHeight;
+    setTimeout(function() {
+        container.removeChild(t);
+        callback();
+    }, 1600);
+}
+
+function lightAmDot(idx) {
+    var ids = ['apd0','apd1','apd2'];
+    var el = document.getElementById(ids[idx]);
+    if(el) el.classList.add('lit');
+}
+
+function setAmLabel(text) {
+    var el = document.getElementById('amProgLabel');
+    if(el) el.textContent = text;
+}
+
 function triggerAmReveal() {
-    // Blur lifts
-    document.getElementById('amPhotoBlur').classList.add('revealed');
-    document.getElementById('amLockBar').classList.add('hidden');
-    document.getElementById('amRevealedBadge').classList.add('show');
-    // Progress dots all lit
+    // Lift blur on photo
+    var blobs = document.getElementById('amPhotoBlobs');
+    var frost = document.getElementById('amPhotoFrost');
+    var lockBar = document.getElementById('amLockBar');
+    var badge = document.getElementById('amRevealedBadge');
+    if(blobs) blobs.classList.add('revealed');
+    if(frost) frost.classList.add('revealed');
+    if(lockBar) lockBar.classList.add('hidden');
+    if(badge) badge.classList.add('show');
+    // All dots lit
     ['apd0','apd1','apd2'].forEach(function(id) {
         var el = document.getElementById(id);
         if(el) el.classList.add('lit');
     });
-    document.getElementById('amProgLabel').textContent = 'Photos revealed! 🎉';
+    setAmLabel('Photos revealed! 🎉');
     var btn = document.getElementById('amSendBtn');
-    btn.textContent = 'Photos unlocked ✓';
-    btn.disabled = true;
+    if(btn) { btn.textContent = 'Photos unlocked ✓'; btn.disabled = true; btn.style.opacity = '.35'; }
 }
 
 function resetAmDemo() {
-    amStep = 0; amSending = false;
-    document.getElementById('amPhotoBlur').classList.remove('revealed');
-    document.getElementById('amLockBar').classList.remove('hidden');
-    document.getElementById('amRevealedBadge').classList.remove('show');
+    amStep = 0;
+    amBusy = false;
+    // Reset photo blur
+    var blobs = document.getElementById('amPhotoBlobs');
+    var frost = document.getElementById('amPhotoFrost');
+    var lockBar = document.getElementById('amLockBar');
+    var badge = document.getElementById('amRevealedBadge');
+    if(blobs) blobs.classList.remove('revealed');
+    if(frost) frost.classList.remove('revealed');
+    if(lockBar) lockBar.classList.remove('hidden');
+    if(badge) badge.classList.remove('show');
+    // Reset dots
     ['apd0','apd1','apd2'].forEach(function(id) {
         var el = document.getElementById(id);
         if(el) el.classList.remove('lit');
     });
-    document.getElementById('amProgLabel').textContent = 'Exchange messages to reveal photos';
-    document.getElementById('amChatMsgs').innerHTML = '';
-    document.getElementById('amChatThread').classList.remove('open');
+    setAmLabel('Start the conversation');
+    // Reset chat
+    var chatMsgs = document.getElementById('amChatMsgs');
+    if(chatMsgs) chatMsgs.innerHTML = '';
+    var thread = document.getElementById('amChatThread');
+    if(thread) thread.classList.remove('open');
+    // Reset Break the Ice button
     var breakBtn = document.getElementById('amBreakBtn');
-    breakBtn.disabled = false;
-    breakBtn.textContent = 'Break the ice';
+    if(breakBtn) { breakBtn.disabled = false; breakBtn.textContent = 'Break the ice'; }
+    // Reset send button
     var sendBtn = document.getElementById('amSendBtn');
-    sendBtn.disabled = false;
-    sendBtn.textContent = 'Send a message →';
+    if(sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send message →'; sendBtn.style.opacity = '1'; }
 }
 
 /* ─── CARD 3D TILT ─── */
